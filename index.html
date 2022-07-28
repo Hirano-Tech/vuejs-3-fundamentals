@@ -7,16 +7,23 @@
   </head>
   <body>
     <div id='shopping-list'>
-      <h1> {{ header }} </h1>
-      <input v-model='header' />
+      <!-- <h1> {{ header }} </h1> -->
+        <!-- data() メソッドの中のプロパティの値を返します。 -->
+
+      <!-- <h1> {{ header.toLocaleUpperCase() }} </h1> -->
+        <!-- 式展開した中で、直接 JavaScript のコードを記述することもできます。 -->
+
+      <!-- <h1> {{ header ? header : 'Welcome' }} </h1> -->
+      <h1> {{ header || 'Welcome' }} </h1>
+        <!-- 指定したプロパティが存在しなかった場合に右辺の値を表示します。 -->
     </div>
 
     <script src='https://unpkg.com/vue@3'></script>
     <script>
-      const shoppingList = Vue.createApp({
+      Vue.createApp({
         data() {
           return {
-            header: 'Vue is ready to party!'
+            header: 'Shopping List App'
           }
         }
       }).mount('#shopping-list')
