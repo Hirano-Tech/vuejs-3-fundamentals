@@ -16,14 +16,24 @@
       <!-- <h1> {{ header ? header : 'Welcome' }} </h1> -->
       <h1> {{ header || 'Welcome' }} </h1>
         <!-- 指定したプロパティが存在しなかった場合に右辺の値を表示します。 -->
+
+      <ul>
+        <li v-for='item in items' :key='item.id'>{{ item.label }}</li>
+          <!-- Vue.js の繰り返し構文 -->
+      </ul>
     </div>
 
     <script src='https://unpkg.com/vue@3'></script>
     <script>
-      Vue.createApp({
+      const shoppingListApp = Vue.createApp({
         data() {
           return {
-            header: 'Shopping List App'
+            header: 'Shopping List App',
+            items: [
+              {id: 1, label: '10 party hats'},
+              {id: 2, label: '2 board games'},
+              {id: 3, label: '20 cups'}
+          ]
           }
         }
       }).mount('#shopping-list')
