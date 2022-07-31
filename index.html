@@ -17,12 +17,25 @@
       <h1> {{ header || 'Welcome' }} </h1>
         <!-- 指定したプロパティが存在しなかった場合に右辺の値を表示します。 -->
 
-      <input v-model='newItem' type='text' placeholder='Add an item' />
+      <div class='add-item-form'>
+        <input v-model='newItem' @keyup.enter='items.push({id: items.length + 1, label: newItem})' type='text' placeholder='Add an item' />
         <!-- 
           v-model="プロパティ名"：非同期でリアルタイムに更新する。
           v-model.lazy="プロパティ名"：フォームからアクティブが外れたとき、更新する。
          -->
 
+        <label>
+          <input v-model='newItemHighPriority' type='checkbox'> High Priority
+        </label>
+
+        <button @click='items.push({id: items.length + 1, label: newItem})' class='btn btn-primary'>Save Item</button>
+          <!--
+            @click="Vue.js での処理"：クリックしたときに処理を実行する。
+            @keyup.enter="Vue.js での処理"：Enter キーを押下したときに処理を実行する。
+          -->
+      </div>
+
+      <!-- 【参考】ラジオボタン，セレクトボックス，チェックボックスの値を非同期で取得する。 -->
       <!-- <label>
         <input v-model='newItemPriority' type='radio' value='Low'>Low
       </label>
@@ -30,19 +43,13 @@
         <input v-model='newItemPriority' type='radio' value='High'>High
       </label><br /> -->
 
-      <label>
+      <!-- <label>
         Priority
         <select v-model='newItemPriority'>
           <option value='Low'>Low</option>
           <option value='High'>High</option>
         </select>
-      </label><br />
-
-      <label>
-        <input v-model='newItemHighPriority' type='checkbox'> High Priority
-      </label><br />
-
-      <!-- {{ newItem }} {{ newItemPriority }} {{ newItemHighPriority }} -->
+      </label> -->
 
       <!-- <label>
         <input v-model='iceCreamFlavors' type='checkbox' value='Vanilla' />Vanilla
@@ -59,6 +66,8 @@
       <label>
         <input v-model='iceCreamFlavors' type='checkbox' value='Cookies and Cream' />Cookies and Cream
       </label> -->
+
+      <!-- {{ newItem }} {{ newItemPriority }} {{ newItemHighPriority }} -->
 
       <ul>
         <li v-for='item in items' :key='item.id'>{{ item.label }}</li>
