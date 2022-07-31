@@ -17,6 +17,49 @@
       <h1> {{ header || 'Welcome' }} </h1>
         <!-- 指定したプロパティが存在しなかった場合に右辺の値を表示します。 -->
 
+      <input v-model='newItem' type='text' placeholder='Add an item' />
+        <!-- 
+          v-model="プロパティ名"：非同期でリアルタイムに更新する。
+          v-model.lazy="プロパティ名"：フォームからアクティブが外れたとき、更新する。
+         -->
+
+      <!-- <label>
+        <input v-model='newItemPriority' type='radio' value='Low'>Low
+      </label>
+      <label>
+        <input v-model='newItemPriority' type='radio' value='High'>High
+      </label><br /> -->
+
+      <label>
+        Priority
+        <select v-model='newItemPriority'>
+          <option value='Low'>Low</option>
+          <option value='High'>High</option>
+        </select>
+      </label><br />
+
+      <label>
+        <input v-model='newItemHighPriority' type='checkbox'> High Priority
+      </label><br />
+
+      <!-- {{ newItem }} {{ newItemPriority }} {{ newItemHighPriority }} -->
+
+      <!-- <label>
+        <input v-model='iceCreamFlavors' type='checkbox' value='Vanilla' />Vanilla
+      </label>
+
+      <label>
+        <input v-model='iceCreamFlavors' type='checkbox' value='Chocolate' />Chocolate
+      </label>
+
+      <label>
+        <input v-model='iceCreamFlavors' type='checkbox' value='Strawberry' />Strawberry
+      </label>
+
+      <label>
+        <input v-model='iceCreamFlavors' type='checkbox' value='Cookies and Cream' />Cookies and Cream
+      </label> -->
+
       <ul>
         <li v-for='item in items' :key='item.id'>{{ item.label }}</li>
           <!-- Vue.js の繰り返し構文 -->
@@ -29,6 +72,10 @@
         data() {
           return {
             header: 'Shopping List App',
+            newItem: '',
+            newItemPriority: 'Low',
+            newItemHighPriority: false,
+            // iceCreamFlavors: [],
             items: [
               {id: 1, label: '10 party hats'},
               {id: 2, label: '2 board games'},
