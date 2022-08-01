@@ -41,9 +41,6 @@
           -->
       </div>
 
-      <!-- <a v-bind:href='newItem'>Dynamic Link</a> -->
-      <p v-if='items.length === 0'>Nice job! You've bought all your items!</p>
-
       <!-- 【参考】ラジオボタン，セレクトボックス，チェックボックスの値を非同期で取得する。 -->
       <!-- <label>
         <input v-model='newItemPriority' type='radio' value='Low'>Low
@@ -78,9 +75,13 @@
 
       <!-- {{ newItem }} {{ newItemPriority }} {{ newItemHighPriority }} -->
 
+      <!-- <a v-bind:href='newItem'>Dynamic Link</a> -->
+      <p v-if='items.length === 0'>Nice job! You've bought all your items!</p>
+
       <ul>
-        <li v-for='item in items' :key='item.id'>{{ item.label }}</li>
+        <li v-for='item in items' @click='togglePurchased(item)' :key='item.id' :class="[ {strikeout: item.purchased}, {priority: item.highPriority}, 'static-class' ]">{{ item.label }}</li>
           <!-- Vue.js の繰り返し構文 -->
+          <!-- :class 属性で、動的にクラスの True / False を設定する。 -->
       </ul>
     </div>
 
@@ -96,9 +97,9 @@
             newItemHighPriority: false,
             // iceCreamFlavors: [],
             items: [
-              // {id: 1, label: '10 party hats'},
-              // {id: 2, label: '2 board games'},
-              // {id: 3, label: '20 cups'}
+              {id: 1, label: '10 party hats', purchased: true, highPriority: false},
+              {id: 2, label: '2 board games', purchased: true, highPriority: false},
+              {id: 3, label: '20 cups', purchased: false, highPriority: true}
           ]
           }
         },
@@ -106,13 +107,24 @@
         methods: {
           // Vue.js の処理を記述する。
           saveItem() {
-            this.items.push({id: this.items.length + 1, label: this.newItem})
+            this.items.push({
+              id: this.items.length + 1,
+              label: this.newItem,
+              highPriority: this.newItemHighPriority
+            })
+
             this.newItem = ''
+            this.newItemHighPriority = ''
           },
 
           doEdit(editing) {
             this.editing = editing
             this.newItem = ''
+            this.newItemHighPriority = ''
+          },
+
+          togglePurchased(item) {
+            item.purchased = !item.purchased
           }
         }
       }).mount('#shopping-list')
