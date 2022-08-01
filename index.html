@@ -7,17 +7,22 @@
   </head>
   <body>
     <div id='shopping-list'>
-      <!-- <h1> {{ header }} </h1> -->
-        <!-- data() メソッドの中のプロパティの値を返します。 -->
+      <div class='header'>
+        <!-- <h1> {{ header }} </h1> -->
+          <!-- data() メソッドの中のプロパティの値を返します。 -->
 
-      <!-- <h1> {{ header.toLocaleUpperCase() }} </h1> -->
-        <!-- 式展開した中で、直接 JavaScript のコードを記述することもできます。 -->
+        <!-- <h1> {{ header.toLocaleUpperCase() }} </h1> -->
+          <!-- 式展開した中で、直接 JavaScript のコードを記述することもできます。 -->
 
-      <!-- <h1> {{ header ? header : 'Welcome' }} </h1> -->
-      <h1> {{ header || 'Welcome' }} </h1>
-        <!-- 指定したプロパティが存在しなかった場合に右辺の値を表示します。 -->
+        <!-- <h1> {{ header ? header : 'Welcome' }} </h1> -->
+        <h1> {{ header || 'Welcome' }} </h1>
+          <!-- 指定したプロパティが存在しなかった場合に右辺の値を表示します。 -->
 
-      <div class='add-item-form'>
+        <button v-if='editing' @click='doEdit(false)' class='btn btn-cancel'>Cancel</button>
+        <button v-else @click='doEdit(true)' class='btn btn-primary'>Add Item</button>
+      </div>
+
+      <div v-if='editing' class='add-item-form'>
         <input v-model='newItem' @keyup.enter='saveItem' type='text' placeholder='Add an item' />
         <!-- 
           v-model="プロパティ名"：非同期でリアルタイムに更新する。
@@ -34,6 +39,8 @@
             @keyup.enter="Vue.js での処理"：Enter キーを押下したときに処理を実行する。
           -->
       </div>
+
+      <p v-if='items.length === 0'>Nice job! You've bought all your items!</p>
 
       <!-- 【参考】ラジオボタン，セレクトボックス，チェックボックスの値を非同期で取得する。 -->
       <!-- <label>
@@ -81,21 +88,28 @@
         data() {
           return {
             header: 'Shopping List App',
+            editing: false,
             newItem: '',
             newItemPriority: 'Low',
             newItemHighPriority: false,
             // iceCreamFlavors: [],
             items: [
-              {id: 1, label: '10 party hats'},
-              {id: 2, label: '2 board games'},
-              {id: 3, label: '20 cups'}
+              // {id: 1, label: '10 party hats'},
+              // {id: 2, label: '2 board games'},
+              // {id: 3, label: '20 cups'}
           ]
           }
         },
 
         methods: {
+          // Vue.js の処理を記述する。
           saveItem() {
             this.items.push({id: this.items.length + 1, label: this.newItem})
+            this.newItem = ''
+          },
+
+          doEdit(editing) {
+            this.editing = editing
             this.newItem = ''
           }
         }
