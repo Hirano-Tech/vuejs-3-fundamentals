@@ -58,4 +58,6 @@ Once completed, you'll have a solid foundation for your Vue journey.
 
 - [Vue.js 3 Fundamentals with the Options API | Vue School](https://vueschool.io/courses/vuejs-3-fundamentals)
 
+  - 本コースは、[Vue.js Fundamentals | Vue School](https://vueschool.io/courses/vuejs-fundamentals) の最新版です。
+
 - [Vue.js devtools | Chrome ウェブストア](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
