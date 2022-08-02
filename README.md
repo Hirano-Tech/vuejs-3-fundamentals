@@ -1,5 +1,7 @@
 ## Vue.js 3 Fundamentals with the Options API（Vue.js 3 オプションAPIによる基礎知識）| Vue School
 
+<img src='https://user-images.githubusercontent.com/63486456/182264390-58c24db4-71f3-46a3-b81d-e6549f97a922.png' alt='完成イメージ画像' width='50%' />
+
 ### ■ 概要
 
 Learn the fundamental concepts and get up and running with Vue.js 3.
